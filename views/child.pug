@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Current Folder: #{currentFolder}
+  ul
+   each val in data
+    li
+      a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name
