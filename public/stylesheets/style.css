@@ -1,8 +1,106 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
+}
+body {
+  background: #f9f9f9;
+  font-family: Comic Sans MS;
+}
+header, footer {
+  background: #fff;
+}
+/* Header Styles */
+.logo {
+  width: 20%;
+  text-align: center;
+}
+
+.logo img#logo {
+  width: 101px;
+  margin: 12px 0;
+}
+
+.search {
+  width: 20%;
+}
+
+.search input.form-control {
+  width: 80%;
+  margin: 30px 0;
+}
+
+.header-holder {
+  box-shadow: -1px 1px 3px #999;
+}
+
+/* Home Page styles */
+#view {
+  width: 80%;
+  margin: 40px auto;
+}
+
+#view ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.thumb {
+  width: 30%;
+  display: inline-block;
+  background: #fff;
+  min-height: 170px;
+  margin: 0 30px 0 0;
+  padding: 20px;
+  box-shadow: 0px 1px 7px 1px #888;
+}
+
+.thumb span, .thumb a {
+  display: block;
+  color: #000;
+  text-align: center;
+}
+
+.thumb span {
+  font-size: 60px;
+  padding: 20px 0 10px;
+}
+
+/* Inner page styles */
+.innerList li {
+  display: inline-block;
+  width: 17%;
+  background: #fff;
+  min-height: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 20px;
+  margin: 0 30px 20px 0;
+  box-shadow: 0px 1px 7px 1px #888;
+}
+
+.innerList li a{
+  color: #000;
+}
+
+/* Breadcrumb Styles */
+
+main .breadcrumb {
+  background: none;
+}
+
+main .breadcrumb a, main .breadcrumb li {
+  color: #000;
+}
+
+/* Footer Styles */
+#footer {
+  box-shadow: 0px -1px 1px #888;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.copy-rights{
+  margin: 15px 0;
+  text-align: center;
 }

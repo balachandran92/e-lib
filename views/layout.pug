@@ -2,6 +2,27 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/all.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='icon', type='image/png', href='/images/favicon.png' )
   body
+    block header
+      header#header
+        div.header-holder
+            div.logo.float-left
+              img#logo(src='/images/e-lib.png', title='மின் நூலகம்')
+            div.search.float-right
+              input.form-control(type='text', placeholder='search...')
+            div.clearfix
+
     block content
+
+    block footer
+      footer#footer
+        p.copy-rights &copy; Copyright மின் நூலகம் 2019
+
+    block scripts
+      script(src='/js/jquery-min.js')
+      script(src='/js/popper.min.js')
+      script(src='/js/bootstrap.min.js')

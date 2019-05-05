@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  ul
-   each val in folders
-    li
-      a(href=val)= val 
+  main
+    div#view
+      h1.text-center= title
+      p.text-center Welcome to #{title}
+      ul
+        each val in folders
+          li.thumb
+            span(class = val.thumb)
+            a(href=val.fileName)= val.fileName 

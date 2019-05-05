@@ -1,9 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Current Folder: #{currentFolder}
-  ul
-   each val in data
-    li
-      a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name
+  main
+    div#view
+      h1.text-center= title
+      nav(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/')
+              i.fas.fa-home
+          li.breadcrumb-item.active(aria-current='page') #{currentFolder}
+      ul.innerList
+        each val in data
+          li
+            a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name
