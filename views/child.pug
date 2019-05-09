@@ -6,11 +6,23 @@ block content
       h1.text-center= title
       nav(aria-label='breadcrumb')
         ol.breadcrumb
-          li.breadcrumb-item
-            a(href='/')
-              i.fas.fa-home
-          li.breadcrumb-item.active(aria-current='page') #{currentFolder}
+          if bdBuilder != undefined
+            li.breadcrumb-item
+              a(href='/')
+                i.fas.fa-home
+            each val in bdBuilder
+              li.breadcrumb-item
+                a(href=val.url)=val.name
+          else
+            li.breadcrumb-item
+              a(href='/')
+                i.fas.fa-home
+            li.breadcrumb-item.active(aria-current='page') #{currentFolder}
       ul.innerList
         each val in data
-          li
-            a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name
+          if val.isDir
+            li
+              a(href='#', rel="noopener noreferrer", class='query')=val.name
+          else
+            li
+              a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name

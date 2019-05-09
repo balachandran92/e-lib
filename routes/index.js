@@ -17,8 +17,7 @@ fs.readdir(testFolder, (err, files) => {
 });
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  
+router.get('/', function(req, res, next) {  
   res.render('index', { title: 'E-Library', folders });  
 });
 
