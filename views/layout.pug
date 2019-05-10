@@ -13,7 +13,7 @@ html
             div.logo.float-left
               img#logo(src='/images/e-lib.png', title='மின் நூலகம்')
             div.search.float-right
-              input.form-control(type='text', placeholder='search...')
+              input.btn.btn-default.search-btn(type='button', value='search...', data-toggle='modal', data-target='#searchModal')
             div.clearfix
 
     block content
@@ -21,6 +21,17 @@ html
     block footer
       footer#footer
         p.copy-rights &copy; Copyright மின் நூலகம் 2019
+
+    block modal
+      div#searchModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='searchModalLabel' aria-hidden='true')
+        div.modal-dialog(role='document')
+          div.modal-content
+            div.modal-header
+              input#search.form-control.search-box(type="text", placeholder="search...")
+            div.modal-body
+              ul.innerList
+            div.modal-footer
+              button.btn.btn-secondary(type='button' data-dismiss='modal') Close
 
     block scripts
       script(src='/js/jquery-min.js')

@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var fs = require('fs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -22,6 +23,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.get('/:id', childRouter);
 app.get('/:id/:childid', childRouter);
+
+
+/* Search Api */
+var response = []; 
+var dataChunk = [];
+app.get('/api/search', function(req, res){
+
+  function walkSync (dir, filelist = []) {
+      fs.readdirSync(dir).forEach(file => {
+          const dirFile = path.join(dir, file);
+          try {
+              filelist = walkSync(dirFile, filelist);
+          }
+          catch (err) {
+              if (err.code === 'ENOTDIR' || err.code === 'EBUSY') filelist = [...filelist, dirFile];
+              else throw err;
+          }
+      });
+      return filelist;
+  }  
+
+  dataChunk = walkSync("public/lib");
+
+  var query = req.query.s;
+
+  response = dataChunk.filter(function(quel){
+    return quel.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  });
+
+  res.json(response);
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
