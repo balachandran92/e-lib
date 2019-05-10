@@ -10,6 +10,8 @@ block content
             li.breadcrumb-item
               a(href='/')
                 i.fas.fa-home
+            li.breadcrumb-item
+              a(href='/'+currentFolder)=currentFolder
             each val in bdBuilder
               li.breadcrumb-item
                 a(href=val.url)=val.name

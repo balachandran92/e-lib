@@ -17,7 +17,7 @@ Object.prototype.isEmpty = function() {
 router.get('/:id', function(req, res, next) {
   console.log(req.query);
   var data = [];
-
+  /* First child folder */
   if(req.query.isEmpty()){
     fs.readdirSync(parentFolder+req.params.id).forEach(file => {
       var obj = {};
@@ -25,20 +25,25 @@ router.get('/:id', function(req, res, next) {
       obj.absPath ='/lib/'+req.params.id+"/"+file;
       obj.isDir = fs.lstatSync("E:/e-lib/"+parentFolder+req.params.id+"/"+file).isDirectory();
       data.push(obj);
-      console.log(data);
     });
-  } else{
+  } /* inner child folders */
+  else{
     var currentFolder = req.query.fol;
     currentFolder = currentFolder.split(',').join('/');
     var innerPath = parentFolder+req.params.id+"/"+currentFolder;
     var breadCrumb = req.params.id+"/"+ currentFolder;
     var breadCrumbArr = breadCrumb.split('/');
     var bdBuilder = [];
+    var url = "?fol=";
 
-    for(var i=0; i<breadCrumbArr.length; i++) {
+    for(var i=1; i<breadCrumbArr.length; i++) {
       var chunk = {};
       chunk.name = breadCrumbArr[i];
-      chunk.url += "/"+chunk.name;
+      if(url[url.length-1] != '='){
+        url+=',';
+      }
+      url += chunk.name;
+      chunk.url = url;
       bdBuilder.push(chunk);
     }
 
@@ -49,8 +54,6 @@ router.get('/:id', function(req, res, next) {
       obj.isDir = fs.lstatSync("E:/e-lib/"+innerPath+"/"+file).isDirectory();      
       data.push(obj);
     });
-
-    console.log(bdBuilder);
   }  
 
   res.render('child', {title: 'E-library', currentFolder: req.params.id, data, bdBuilder});
