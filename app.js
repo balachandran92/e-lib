@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.get('/:id', childRouter);
-app.get('/:id/:childid', childRouter);
 
 
 /* Search Api */

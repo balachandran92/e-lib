@@ -4,6 +4,10 @@ var fs = require('fs');
 var path = require('path');
 var parentFolder = 'public/lib/';
 
+var baseFolder = __dirname.split('\\');
+baseFolder.pop();
+baseFolder = baseFolder.join('\\');
+
 /*isEmptyObject function*/
 Object.prototype.isEmpty = function() {
   for(var key in this) {
@@ -23,7 +27,7 @@ router.get('/:id', function(req, res, next) {
       var obj = {};
       obj.name = file;
       obj.absPath ='/lib/'+req.params.id+"/"+file;
-      obj.isDir = fs.lstatSync("E:/e-lib/"+parentFolder+req.params.id+"/"+file).isDirectory();
+      obj.isDir = fs.lstatSync(baseFolder+"/"+parentFolder+req.params.id+"/"+file).isDirectory();
       data.push(obj);
     });
   } /* inner child folders */
@@ -51,7 +55,7 @@ router.get('/:id', function(req, res, next) {
       var obj = {};
       obj.name = file;
       obj.absPath ='/lib/'+req.params.id+"/"+currentFolder+"/"+file;
-      obj.isDir = fs.lstatSync("E:/e-lib/"+innerPath+"/"+file).isDirectory();      
+      obj.isDir = fs.lstatSync(baseFolder+"/"+innerPath+"/"+file).isDirectory();      
       data.push(obj);
     });
   }  
