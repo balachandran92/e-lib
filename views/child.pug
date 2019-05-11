@@ -25,9 +25,13 @@ block content
           li No files in this folder
         else
           each val in data
-            if val.isDir
-              li
-                a(href='#', rel="noopener noreferrer", class='query')=val.name
+            if val.isDir              
+              a(href='#', rel="noopener noreferrer", class='query')
+                li
+                  span.fa.fa-folder
+                  span.textCon(title=val.name)=val.name
             else
-              li
-                a(href=val.absPath, target="_blank", rel="noopener noreferrer")=val.name
+              a(href=val.absPath, target="_blank", class='fileList', rel="noopener noreferrer")
+                li
+                  span.fa.fa-file
+                  span.textCon(title=val.name)=val.name

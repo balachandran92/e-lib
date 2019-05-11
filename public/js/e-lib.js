@@ -33,7 +33,7 @@
                             var fileNameFlask = flask[flask.length-1];
                             flask.shift();
                             flask = flask.join('\\');
-                            htmlRes+="<li><a target='_blank' rel='noopener noreferrer' href='"+flask+"'>"+fileNameFlask+"</a></li>"               
+                            htmlRes+="<a target='_blank' rel='noopener noreferrer' href='"+flask+"'><li><span>"+fileNameFlask+"</span></li></a>"               
                         }
                         $('.modal-body .innerList').append(htmlRes); 
                     } else {

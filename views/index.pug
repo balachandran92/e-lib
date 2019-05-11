@@ -7,6 +7,7 @@ block content
       p.text-center Welcome to #{title}
       ul
         each val in folders
-          li.thumb
-            span(class = val.thumb)
-            a(href=val.fileName)= val.fileName 
+          a(href=val.fileName)
+            li.thumb
+              span(class = val.thumb)
+              span(class = 'text-holder')= val.fileName 

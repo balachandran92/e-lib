@@ -73,21 +73,40 @@ header, footer {
   padding: 20px 0 10px;
 }
 
+.thumb span.text-holder {
+  font-size: 1rem;
+  padding: 0;
+}
 /* Inner page styles */
-.innerList li {
+.innerList a{
+  color: #000;
+  text-decoration: none;  
   display: inline-block;
   width: 17%;
   background: #fff;
-  min-height: 140px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-height: 140px;  
   padding: 20px;
   margin: 0 30px 20px 0;
-  box-shadow: 0px 1px 7px 1px #888;
+  box-shadow: 0px 1px 7px 1px #888;  
 }
 
-.innerList li a{
-  color: #000;
+.innerList a li {
+  min-height: 90px;
+}
+
+.query .fa, .fileList .fa{
+  display: block;
+  text-align: center;
+  font-size: 40px;
+  padding: 0 0 15px;
+}
+
+.query .textCon, .fileList .textCon{
+  display: block;
+  text-align: center;  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Breadcrumb Styles */
