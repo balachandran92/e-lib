@@ -17,6 +17,21 @@ Object.prototype.isEmpty = function() {
   return true;
 }
 
+var fileType = function (file){
+  var extName = path.extname(file).toLowerCase();
+  var imgFormats = '.png.jpg.jpeg.iix.tiff.gif';
+  var videoFormats = '.mp4.3gp.mkv.wmv.ogg.webm.flv.avi.vob';
+  if(imgFormats.indexOf(extName) != -1){
+    return 'img';
+  } else if (videoFormats.indexOf(extName) != -1) {
+      return 'vids';
+  } else if (extName == '.pdf') {
+      return 'pdf';
+  } else {
+      return 'others';
+  }
+};
+
 /* GET Folder listing. */
 router.get('/:id', function(req, res, next) {
   console.log(req.query);
@@ -28,7 +43,9 @@ router.get('/:id', function(req, res, next) {
       obj.name = file;
       obj.absPath ='/lib/'+req.params.id+"/"+file;
       obj.isDir = fs.lstatSync(baseFolder+"/"+parentFolder+req.params.id+"/"+file).isDirectory();
+      obj.fileType = fileType(baseFolder+"/"+parentFolder+req.params.id+"/"+file);
       data.push(obj);
+      console.log(data);
     });
   } /* inner child folders */
   else{
@@ -55,8 +72,10 @@ router.get('/:id', function(req, res, next) {
       var obj = {};
       obj.name = file;
       obj.absPath ='/lib/'+req.params.id+"/"+currentFolder+"/"+file;
-      obj.isDir = fs.lstatSync(baseFolder+"/"+innerPath+"/"+file).isDirectory();      
+      obj.isDir = fs.lstatSync(baseFolder+"/"+innerPath+"/"+file).isDirectory();
+      obj.fileType = fileType(baseFolder+"/"+parentFolder+req.params.id+"/"+file);      
       data.push(obj);
+      console.log(data);
     });
   }  
 

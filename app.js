@@ -47,9 +47,13 @@ app.get('/api/search', function(req, res){
 
   var query = req.query.s;
 
-  response = dataChunk.filter(function(quel){
-    return quel.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-  });
+  if(query.trim() == '') {
+    response = [];
+  } else {
+    response = dataChunk.filter(function(quel){
+      return quel.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    });
+  }
 
   res.json(response);
 

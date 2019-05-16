@@ -28,10 +28,21 @@ block content
             if val.isDir              
               a(href='#', rel="noopener noreferrer", class='query')
                 li
-                  span.fa.fa-folder
+                  span.fa.fa-folder.font-icon
                   span.textCon(title=val.name)=val.name
             else
               a(href=val.absPath, target="_blank", class='fileList', rel="noopener noreferrer")
                 li
-                  span.fa.fa-file
-                  span.textCon(title=val.name)=val.name
+                  if val.fileType == 'img'
+                    img.img-thumbnail.e-thumb(alt='val.name', src=val.absPath, title=val.name)
+                    span.textCon(title=val.name)=val.name
+                  else if val.fileType == 'vids'
+                    video.vidHolder(width="190" height="114" controls="controls" preload="metadata")
+                      source(src=val.absPath type="video/mp4")
+                    span.textCon(title=val.name)=val.name
+                  else if val.fileType == 'pdf'
+                    span.fas.fa-file-pdf.font-icon
+                    span.textCon(title=val.name)=val.name
+                  else
+                    span.fas.fa-file-alt.font-icon
+                    span.textCon(title=val.name)=val.name
