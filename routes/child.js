@@ -60,7 +60,7 @@ router.get('/:id', function(req, res, next) {
     });
   }  
 
-  res.render('child', {title: 'E-library', currentFolder: req.params.id, data, bdBuilder});
+  res.render('child', {title: 'நூலகம்', currentFolder: req.params.id, data, bdBuilder});
 });
 
 module.exports = router;

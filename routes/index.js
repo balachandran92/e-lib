@@ -17,7 +17,7 @@ fs.readdir(testFolder, (err, files) => {
     } else if (file.toLowerCase().indexOf('video')!=-1) {
       thumbnail = 'fas fa-video';
     } else if (file.toLowerCase().indexOf('audio')!=-1) {
-      thumbnail = 'fa fa-music';
+      thumbnail = 'fa fa-headphones';
     } else {
       thumbnail = 'fa fa-folder';
     }
@@ -29,7 +29,7 @@ fs.readdir(testFolder, (err, files) => {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {  
-  res.render('index', { title: 'E-Library', folders });  
+  res.render('index', { title: 'நூலகம்', folders });  
 });
 
 
