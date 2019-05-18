@@ -35,8 +35,8 @@
                             var fileNameFlask = flask[flask.length-1];
                             var fileType = fileNameFlask.split('.').pop().toLowerCase();
                             var imgFormats = 'png,jpg,jpeg,iix,tiff,gif';
-                            var videoFormats = 'mp4,3gp,mkv,wmv,ogg,webm,flv,avi,vob';                            
-                            var unsupportedVideos = '.3gp.wmv.flv.avi.vob.mkv.mov';                           
+                            var videoFormats = 'mp4,ogg,webm';                            
+                            var unsupportedVideos = '3gp,wmv,flv,avi,vob,mkv,mov';                           
                             flask.shift();
                             flask = flask.join('\\');
                             
