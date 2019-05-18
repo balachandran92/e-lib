@@ -3,7 +3,8 @@ var express = require('express');
 var fs = require('fs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var recursive = require("recursive-readdir");
+//var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var childRouter = require('./routes/child');
@@ -29,33 +30,19 @@ var response = [];
 var dataChunk = [];
 app.get('/api/search', function(req, res){
 
-  function walkSync (dir, filelist = []) {
-      fs.readdirSync(dir).forEach(file => {
-          const dirFile = path.join(dir, file);
-          try {
-              filelist = walkSync(dirFile, filelist);
-          }
-          catch (err) {
-              if (err.code === 'ENOTDIR' || err.code === 'EBUSY') filelist = [...filelist, dirFile];
-              else throw err;
-          }
-      });
-      return filelist;
-  }  
-
-  dataChunk = walkSync("public/lib");
-
   var query = req.query.s;
 
-  if(query.trim() == '') {
-    response = [];
-  } else {
-    response = dataChunk.filter(function(quel){
-      return quel.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    });
-  }
-
-  res.json(response);
+  recursive("public/lib", function (err, files) {
+    dataChunk = files;
+    if(query.trim() == '') {
+      response = [];
+    } else {
+        response = dataChunk.filter(function(quel){
+            return quel.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+        });
+    }  
+    res.json(response);
+  });  
 
 });
 
