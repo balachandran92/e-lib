@@ -20,11 +20,14 @@ Object.prototype.isEmpty = function() {
 var fileType = function (file){
   var extName = path.extname(file).toLowerCase();
   var imgFormats = '.png.jpg.jpeg.iix.tiff.gif';
-  var videoFormats = '.mp4.3gp.mkv.wmv.ogg.webm.flv.avi.vob';
+  var videoFormats = '.mp4.ogg.webm';
+  var unsupportedVideos = '.3gp.wmv.flv.avi.vob.mkv.mov';
   if(imgFormats.indexOf(extName) != -1){
     return 'img';
   } else if (videoFormats.indexOf(extName) != -1) {
       return 'vids';
+  } else if (unsupportedVideos.indexOf(extName) != -1) {
+      return 'unsupportedVids';
   } else if (extName == '.pdf') {
       return 'pdf';
   } else {
@@ -34,7 +37,6 @@ var fileType = function (file){
 
 /* GET Folder listing. */
 router.get('/:id', function(req, res, next) {
-  console.log(req.query);
   var data = [];
   /* First child folder */
   if(req.query.isEmpty()){
@@ -45,7 +47,6 @@ router.get('/:id', function(req, res, next) {
       obj.isDir = fs.lstatSync(baseFolder+"/"+parentFolder+req.params.id+"/"+file).isDirectory();
       obj.fileType = fileType(baseFolder+"/"+parentFolder+req.params.id+"/"+file);
       data.push(obj);
-      console.log(data);
     });
   } /* inner child folders */
   else{
@@ -75,11 +76,10 @@ router.get('/:id', function(req, res, next) {
       obj.isDir = fs.lstatSync(baseFolder+"/"+innerPath+"/"+file).isDirectory();
       obj.fileType = fileType(baseFolder+"/"+parentFolder+req.params.id+"/"+file);      
       data.push(obj);
-      console.log(data);
     });
   }  
 
-  res.render('child', {title: 'நூலகம்', currentFolder: req.params.id, data, bdBuilder});
+  res.render('child', {title: 'E-library', currentFolder: req.params.id, data, bdBuilder});
 });
 
 module.exports = router;

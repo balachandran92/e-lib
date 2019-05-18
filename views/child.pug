@@ -40,6 +40,9 @@ block content
                     video.vidHolder(width="190" height="114" controls="controls" preload="metadata")
                       source(src=val.absPath type="video/mp4")
                     span.textCon(title=val.name)=val.name
+                  else if val.fileType == 'unsupportedVids'
+                    span.fas.fa-video.font-icon
+                    span.textCon(title=val.name)=val.name
                   else if val.fileType == 'pdf'
                     span.fas.fa-file-pdf.font-icon
                     span.textCon(title=val.name)=val.name

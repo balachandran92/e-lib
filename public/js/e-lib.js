@@ -20,22 +20,23 @@
         var searchKey = $(this).val();
         var key = e.which;
         // the enter key code
-        if(key == 13){
+        if(key == 13){                  
+            $('.modal-body .innerList').html("");
+            $('.modal-body .search-overlay').show();
             $.ajax({
                 url: "/api/search?s="+searchKey,
                 type: 'GET',
                 dataType: 'json', 
                 success: function(res) {
-                    var overlayStr = '<div class="search-overlay"><img class="loader" src="/images/loader.gif" alt="Loading..."></div>';                  
                     $('.modal-body .innerList').html("");
-                    $('.modal-body').prepend(overlayStr);
                     if(res.length > 0) {
                         for(var i=0; i<res.length; i++){
                             var flask = res[i].split('\\');
                             var fileNameFlask = flask[flask.length-1];
                             var fileType = fileNameFlask.split('.').pop().toLowerCase();
                             var imgFormats = 'png,jpg,jpeg,iix,tiff,gif';
-                            var videoFormats = 'mp4,3gp,mkv,wmv,ogg,webm,flv,avi,vob';                           
+                            var videoFormats = 'mp4,3gp,mkv,wmv,ogg,webm,flv,avi,vob';                            
+                            var unsupportedVideos = '.3gp.wmv.flv.avi.vob.mkv.mov';                           
                             flask.shift();
                             flask = flask.join('\\');
                             
@@ -43,6 +44,8 @@
                                 thumb = "<img class='img-thumbnail e-thumb' src='"+flask+"' alt='"+fileNameFlask+"' title='"+fileNameFlask+"'/>";
                             } else if (videoFormats.indexOf(fileType) != -1) {
                                 thumb = "<video class='vidHolder' width='190' height='114' controls='controls' preload='metadata'><source src='"+flask+"' type='video/mp4'/></video>";
+                            } else if (unsupportedVideos.indexOf(fileType) != -1) {
+                                thumb = "<span class='fa fa-video font-icon'></span>";
                             } else if (fileType == 'pdf') {
                                 thumb = "<span class='fas fa-file-pdf font-icon'></span>";
                             } else {
@@ -50,10 +53,10 @@
                             }
                             htmlRes+="<a target='_blank' class='query' rel='noopener noreferrer' href='"+flask+"'><li>"+thumb+"<span class='textCon'>"+fileNameFlask+"</span></li></a>"               
                         }
-                        $('.search-overlay').remove();
+                        $('.modal-body .search-overlay').hide();
                         $('.modal-body .innerList').append(htmlRes); 
                     } else {
-                        $('.search-overlay').remove();
+                        $('.modal-body .search-overlay').hide();
                         $('.modal-body .innerList').append("<li class='msg'>NO data found</li>");
                     }                   
                 }
